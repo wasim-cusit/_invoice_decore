@@ -129,6 +129,11 @@ try {
         (int)($_POST['silicon_white'] ?? 0),
         (int)($_POST['hole_caps'] ?? 0),
         (int)($_POST['water_caps'] ?? 0),
+        floatval($_POST['material_cost']),
+        floatval($_POST['hardware_cost']),
+        floatval($_POST['glass_cost']),
+        floatval($_POST['total_cost']),
+        // Individual cost fields
         floatval($_POST['frame_cost'] ?? 0),
         floatval($_POST['sash_cost'] ?? 0),
         floatval($_POST['net_sash_cost'] ?? 0),
@@ -150,15 +155,11 @@ try {
         floatval($_POST['rawal_plug_cost'] ?? 0),
         floatval($_POST['silicon_white_cost'] ?? 0),
         floatval($_POST['hole_caps_cost'] ?? 0),
-        floatval($_POST['water_caps_cost'] ?? 0),
-        floatval($_POST['material_cost']),
-        floatval($_POST['hardware_cost']),
-        floatval($_POST['glass_cost']),
-        floatval($_POST['total_cost'])
+        floatval($_POST['water_caps_cost'] ?? 0)
     ];
 
-    // Type string for bind_param (55 parameters)
-    $type_string = "iisddddddddddiiiiiiiiidiiiiiddddddddddddddddddddddddddd";
+    // Type string for bind_param (59 parameters)
+    $type_string = "iisddddddddddiiiiiiiiidiiiiiddddddddddddddddddddddddddddddd";
     
     // Debug info
     error_log("Number of parameters: " . count($params));
@@ -178,7 +179,7 @@ try {
         $params[20], $params[21], $params[22], $params[23], $params[24], $params[25], $params[26], $params[27], $params[28], $params[29],
         $params[30], $params[31], $params[32], $params[33], $params[34], $params[35], $params[36], $params[37], $params[38], $params[39],
         $params[40], $params[41], $params[42], $params[43], $params[44], $params[45], $params[46], $params[47], $params[48], $params[49],
-        $params[50], $params[51], $params[52], $params[53], $params[54]
+        $params[50], $params[51], $params[52], $params[53], $params[54], $params[55], $params[56], $params[57], $params[58]
     );
 
     if (!$stmt->execute()) {

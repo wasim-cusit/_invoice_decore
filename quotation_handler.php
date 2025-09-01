@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'width_original' => $_POST['width_original'] ?? '',
                     'unit_original' => $_POST['unit_original'] ?? '',
                     'client_id' => isset($_POST['client_id']) ? (int)$_POST['client_id'] : 0,
+                    'calculation_id' => $calc_id,
                     'calculation_data' => $_POST['calculation_data'] ?? '',
                 ];
                 $_SESSION['quotation_items'][] = $item;

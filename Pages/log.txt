@@ -23263,3 +23263,247 @@ Stack trace:
     [54] => 259937.6
 )
 
+[01-Sep-2025 08:51:28 Europe/Berlin] Received POST data: Array
+(
+    [action] => save_calculation
+    [client_id] => 33
+    [company_id] => 1
+    [window_type] => 3PSL
+    [height] => 32
+    [width] => 32
+    [quantity] => 1
+    [total_area] => 1024
+    [frame_length] => 6.74
+    [sash_length] => 12.13
+    [net_sash_length] => 6.06
+    [beading_length] => 12.13
+    [interlock_length] => 4.04
+    [steel_quantity] => 59.20
+    [net_area] => 682.67
+    [net_rubber_quantity] => 1.44
+    [burshi_length] => 352.00
+    [locks] => 2
+    [dummy] => 2
+    [boofer] => 4
+    [stopper] => 4
+    [double_wheel] => 4
+    [net_wheel] => 4
+    [sada_screw] => 40
+    [fitting_screw] => 30
+    [self_screw] => 70
+    [rawal_plug] => 30
+    [silicon_white] => 2
+    [hole_caps] => 30
+    [water_caps] => 2
+    [frame_cost] => 14080
+    [sash_cost] => 23040
+    [net_sash_cost] => 10368
+    [beading_cost] => 0
+    [interlock_cost] => 5376
+    [steel_cost] => 1184.0000000000002
+    [net_cost] => 0
+    [net_rubber_cost] => 129.6
+    [burshi_cost] => 0
+    [locks_cost] => 0
+    [dummy_cost] => 0
+    [boofer_cost] => 0
+    [stopper_cost] => 160
+    [double_wheel_cost] => 0
+    [net_wheel_cost] => 40
+    [sada_screw_cost] => 200
+    [fitting_screw_cost] => 150
+    [self_screw_cost] => 350
+    [rawal_plug_cost] => 0
+    [silicon_white_cost] => 0
+    [hole_caps_cost] => 60
+    [water_caps_cost] => 0
+    [material_cost] => 54177.6
+    [hardware_cost] => 960
+    [glass_cost] => 204800
+    [total_cost] => 259937.6
+)
+
+[01-Sep-2025 08:51:28 Europe/Berlin] Number of parameters: 55
+[01-Sep-2025 08:51:28 Europe/Berlin] Type string length: 59
+[01-Sep-2025 08:51:28 Europe/Berlin] Type string: iisddddddddddiiiiiiiiidiiiiiddddddddddddddddddddddddddddddd
+[01-Sep-2025 08:51:28 Europe/Berlin] Parameters: Array
+(
+    [0] => 33
+    [1] => 1
+    [2] => 3PSL
+    [3] => 32
+    [4] => 32
+    [5] => 1
+    [6] => 1024
+    [7] => 6.74
+    [8] => 12.13
+    [9] => 6.06
+    [10] => 12.13
+    [11] => 4.04
+    [12] => 59.2
+    [13] => 682.67
+    [14] => 1.44
+    [15] => 352
+    [16] => 2
+    [17] => 2
+    [18] => 4
+    [19] => 4
+    [20] => 4
+    [21] => 4
+    [22] => 40
+    [23] => 30
+    [24] => 70
+    [25] => 30
+    [26] => 2
+    [27] => 30
+    [28] => 2
+    [29] => 54177.6
+    [30] => 960
+    [31] => 204800
+    [32] => 259937.6
+    [33] => 14080
+    [34] => 23040
+    [35] => 10368
+    [36] => 0
+    [37] => 5376
+    [38] => 1184
+    [39] => 0
+    [40] => 129.6
+    [41] => 0
+    [42] => 0
+    [43] => 0
+    [44] => 0
+    [45] => 160
+    [46] => 0
+    [47] => 40
+    [48] => 200
+    [49] => 150
+    [50] => 350
+    [51] => 0
+    [52] => 0
+    [53] => 60
+    [54] => 0
+)
+
+[01-Sep-2025 08:51:28 Europe/Berlin] Received POST data: Array
+(
+    [action] => save_calculation
+    [client_id] => 33
+    [company_id] => 1
+    [window_type] => 3PSL
+    [height] => 32
+    [width] => 32
+    [quantity] => 1
+    [total_area] => 1024
+    [frame_length] => 6.74
+    [sash_length] => 12.13
+    [net_sash_length] => 6.06
+    [beading_length] => 12.13
+    [interlock_length] => 4.04
+    [steel_quantity] => 59.20
+    [net_area] => 682.67
+    [net_rubber_quantity] => 1.44
+    [burshi_length] => 352.00
+    [locks] => 2
+    [dummy] => 2
+    [boofer] => 4
+    [stopper] => 4
+    [double_wheel] => 4
+    [net_wheel] => 4
+    [sada_screw] => 40
+    [fitting_screw] => 30
+    [self_screw] => 70
+    [rawal_plug] => 30
+    [silicon_white] => 2
+    [hole_caps] => 30
+    [water_caps] => 2
+    [frame_cost] => 14080
+    [sash_cost] => 23040
+    [net_sash_cost] => 10368
+    [beading_cost] => 0
+    [interlock_cost] => 5376
+    [steel_cost] => 1184.0000000000002
+    [net_cost] => 0
+    [net_rubber_cost] => 129.6
+    [burshi_cost] => 0
+    [locks_cost] => 0
+    [dummy_cost] => 0
+    [boofer_cost] => 0
+    [stopper_cost] => 160
+    [double_wheel_cost] => 0
+    [net_wheel_cost] => 40
+    [sada_screw_cost] => 200
+    [fitting_screw_cost] => 150
+    [self_screw_cost] => 350
+    [rawal_plug_cost] => 0
+    [silicon_white_cost] => 0
+    [hole_caps_cost] => 60
+    [water_caps_cost] => 0
+    [material_cost] => 54177.6
+    [hardware_cost] => 960
+    [glass_cost] => 204800
+    [total_cost] => 259937.6
+)
+
+[01-Sep-2025 08:51:28 Europe/Berlin] Number of parameters: 55
+[01-Sep-2025 08:51:28 Europe/Berlin] Type string length: 59
+[01-Sep-2025 08:51:28 Europe/Berlin] Type string: iisddddddddddiiiiiiiiidiiiiiddddddddddddddddddddddddddddddd
+[01-Sep-2025 08:51:28 Europe/Berlin] Parameters: Array
+(
+    [0] => 33
+    [1] => 1
+    [2] => 3PSL
+    [3] => 32
+    [4] => 32
+    [5] => 1
+    [6] => 1024
+    [7] => 6.74
+    [8] => 12.13
+    [9] => 6.06
+    [10] => 12.13
+    [11] => 4.04
+    [12] => 59.2
+    [13] => 682.67
+    [14] => 1.44
+    [15] => 352
+    [16] => 2
+    [17] => 2
+    [18] => 4
+    [19] => 4
+    [20] => 4
+    [21] => 4
+    [22] => 40
+    [23] => 30
+    [24] => 70
+    [25] => 30
+    [26] => 2
+    [27] => 30
+    [28] => 2
+    [29] => 54177.6
+    [30] => 960
+    [31] => 204800
+    [32] => 259937.6
+    [33] => 14080
+    [34] => 23040
+    [35] => 10368
+    [36] => 0
+    [37] => 5376
+    [38] => 1184
+    [39] => 0
+    [40] => 129.6
+    [41] => 0
+    [42] => 0
+    [43] => 0
+    [44] => 0
+    [45] => 160
+    [46] => 0
+    [47] => 40
+    [48] => 200
+    [49] => 150
+    [50] => 350
+    [51] => 0
+    [52] => 0
+    [53] => 60
+    [54] => 0
+)
+

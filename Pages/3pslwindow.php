@@ -792,7 +792,7 @@ try {
         alert(`${type.toUpperCase()}: ${message}`);
       }
       
-      addButton.addEventListener('click', function() {
+      addButton.addEventListener('click', async function() {
         const calcData = {
           calculations: allCalculations,
           totalArea: totalAreaAll,
@@ -800,47 +800,72 @@ try {
           _source: '3psl_calculator'
         };
         
-        // Add each calculation to quotation
-        calcData.calculations.forEach((calc, index) => {
-          const quoteFormData = new FormData();
-          quoteFormData.append('action', 'add_item');
-          quoteFormData.append('window_type', '3PSL');
-          quoteFormData.append('description', `3PSL Window ${index + 1} (${calc.dimensions.original.width}×${calc.dimensions.original.height} ${calc.dimensions.original.unit})`);
-          quoteFormData.append('unit', 'Sft');
-          quoteFormData.append('area', calc.dimensions.area);
-          quoteFormData.append('rate', calc.totals.grandTotal / calc.dimensions.area);
-          quoteFormData.append('amount', calc.totals.grandTotal);
-          quoteFormData.append('quantity', calc.dimensions.quantity);
-          quoteFormData.append('height', calc.dimensions.height);
-          quoteFormData.append('width', calc.dimensions.width);
-          quoteFormData.append('client_id', window.currentClientId);
-          quoteFormData.append('height_original', calc.dimensions.original.height);
-          quoteFormData.append('width_original', calc.dimensions.original.width);
-          quoteFormData.append('unit_original', calc.dimensions.original.unit);
+        // Disable button and show loading state
+        addButton.disabled = true;
+        addButton.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i>Adding to Quotation...`;
+        
+        try {
+          let successCount = 0;
+          const totalCalculations = calcData.calculations.length;
           
-          fetch('quotation_handler.php', {
-            method: 'POST',
-            body: quoteFormData
-          })
-          .then(response => {
+          // Add each calculation to quotation sequentially
+          for (let index = 0; index < calcData.calculations.length; index++) {
+            const calc = calcData.calculations[index];
+            
+            const quoteFormData = new FormData();
+            quoteFormData.append('action', 'add_item');
+            quoteFormData.append('window_type', '3PSL');
+            quoteFormData.append('description', `3PSL Window ${index + 1} (${calc.dimensions.original.width}×${calc.dimensions.original.height} ${calc.dimensions.original.unit})`);
+            quoteFormData.append('unit', 'Sft');
+            quoteFormData.append('area', calc.dimensions.area);
+            quoteFormData.append('rate', calc.totals.grandTotal / calc.dimensions.area);
+            quoteFormData.append('amount', calc.totals.grandTotal);
+            quoteFormData.append('quantity', calc.dimensions.quantity);
+            quoteFormData.append('height', calc.dimensions.height);
+            quoteFormData.append('width', calc.dimensions.width);
+            quoteFormData.append('client_id', window.currentClientId);
+            quoteFormData.append('height_original', calc.dimensions.original.height);
+            quoteFormData.append('width_original', calc.dimensions.original.width);
+            quoteFormData.append('unit_original', calc.dimensions.original.unit);
+            
+            // Include full calculation data like other calculators
+            quoteFormData.append('calculation_data', JSON.stringify(calc));
+            
+            const response = await fetch('quotation_handler.php', {
+              method: 'POST',
+              body: quoteFormData
+            });
+            
             if (!response.ok) {
-              throw new Error('HTTP error: ' + response.status);
+              throw new Error(`HTTP error: ${response.status}`);
             }
-            return response.json();
-          })
-          .then(data => {
+            
+            const data = await response.json();
+            
             if (data.success) {
+              successCount++;
               console.log(`Added calculation ${index + 1} to quotation`);
             } else {
-              console.error(`Error adding calculation ${index + 1}:`, data.error || 'Failed to add');
+              throw new Error(data.error || `Failed to add calculation ${index + 1}`);
             }
-          })
-          .catch(error => {
-            console.error(`Error adding calculation ${index + 1}:`, error);
-          });
-        });
-        
-        showToast(`Added ${calcData.calculations.length} calculations to quotation!`, 'success');
+          }
+          
+          // Show success message and navigate to quotation page
+          showToast(`Successfully added ${successCount} calculations to quotation!`, 'success');
+          
+          // Wait a moment for user to see the success message, then navigate back to main page
+          setTimeout(() => {
+            window.location.href = 'index.php?page=new_calculation';
+          }, 1500);
+          
+        } catch (error) {
+          console.error('Error adding to quotation:', error);
+          showToast(`Error: ${error.message}`, 'error');
+          
+          // Re-enable button
+          addButton.disabled = false;
+          addButton.innerHTML = `<i class="fas fa-plus me-2"></i>Add to Quotation`;
+        }
       });
       
       // Add save functionality
