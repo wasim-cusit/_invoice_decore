@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3PSL Calculator Simple Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <style>
+        .calculation-input-set {
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .calculation-counter {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #4b6cb7;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>3PSL Calculator Simple Test</h2>
+        <p>This is a simplified test to verify the add/remove functionality works.</p>
+        
+        <div id="calculationInputs">
+            <!-- First calculation input set -->
+            <div class="calculation-input-set" data-set-id="1">
+                <div class="calculation-counter">1</div>
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Width</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control width-input" placeholder="Enter width" step="0.01" min="0.01">
+                            <select class="form-select input-group-unit width-unit">
+                                <option value="ft">feet</option>
+                                <option value="in">inches</option>
+                                <option value="cm">centimeters</option>
+                                <option value="mm">millimeters</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Height</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control height-input" placeholder="Enter height" step="0.01" min="0.01">
+                            <select class="form-select input-group-unit height-unit">
+                                <option value="ft">feet</option>
+                                <option value="in">inches</option>
+                                <option value="cm">centimeters</option>
+                                <option value="mm">millimeters</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" class="form-control quantity-input" placeholder="Enter quantity" min="1" value="1">
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <button type="button" class="btn btn-danger btn-sm remove-calculation" style="display: none;">
+                            <i class="fas fa-trash me-1"></i>Remove
+                        </button>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <button type="button" class="btn btn-info btn-sm add-calculation">
+                            <i class="fas fa-plus me-1"></i>Add New
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6 d-grid">
+                <button type="button" id="calculateBtn" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calculator me-2"></i>Calculate All
+                </button>
+            </div>
+        </div>
+        
+        <div id="output" class="mt-4"></div>
+        
+        <div class="mt-4">
+            <h4>Debug Info:</h4>
+            <div id="debugInfo"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Test version of the JavaScript functions
+        let calculationSetCounter = 1;
+        
+        function addCalculationSet() {
+            console.log('=== addCalculationSet function called ===');
+            console.log('Current counter:', calculationSetCounter);
+            
+            const newSet = document.createElement('div');
+            newSet.className = 'calculation-input-set';
+            newSet.setAttribute('data-set-id', calculationSetCounter);
+            
+            newSet.innerHTML = `
+                <div class="calculation-counter">${calculationSetCounter}</div>
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Width</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control width-input" placeholder="Enter width" step="0.01" min="0.01">
+                            <select class="form-select input-group-unit width-unit">
+                                <option value="ft">feet</option>
+                                <option value="in">inches</option>
+                                <option value="cm">centimeters</option>
+                                <option value="mm">millimeters</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Height</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control height-input" placeholder="Enter height" step="0.01" min="0.01">
+                            <select class="form-select input-group-unit height-unit">
+                                <option value="ft">feet</option>
+                                <option value="in">inches</option>
+                                <option value="cm">centimeters</option>
+                                <option value="mm">millimeters</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" class="form-control quantity-input" placeholder="Enter quantity" min="1" value="1">
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <button type="button" class="btn btn-danger btn-sm remove-calculation">
+                            <i class="fas fa-trash me-1"></i>Remove
+                        </button>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <button type="button" class="btn btn-info btn-sm add-calculation">
+                            <i class="fas fa-plus me-1"></i>Add New
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('calculationInputs').appendChild(newSet);
+            updateRemoveButtons();
+            calculationSetCounter++;
+            
+            updateDebugInfo();
+            console.log('New calculation set added successfully');
+        }
+        
+        function removeCalculationSet(setElement) {
+            console.log('=== removeCalculationSet function called ===');
+            setElement.remove();
+            updateRemoveButtons();
+            updateCalculationCounters();
+            updateDebugInfo();
+            console.log('Calculation set removed successfully');
+        }
+        
+        function updateRemoveButtons() {
+            const sets = document.querySelectorAll('.calculation-input-set');
+            sets.forEach((set, index) => {
+                const removeBtn = set.querySelector('.remove-calculation');
+                if (removeBtn) {
+                    if (index === 0) {
+                        removeBtn.style.display = 'none';
+                    } else {
+                        removeBtn.style.display = 'block';
+                    }
+                }
+            });
+            updateCalculationCounters();
+        }
+        
+        function updateCalculationCounters() {
+            const sets = document.querySelectorAll('.calculation-input-set');
+            sets.forEach((set, index) => {
+                const counter = set.querySelector('.calculation-counter');
+                if (counter) {
+                    counter.textContent = index + 1;
+                    set.setAttribute('data-set-id', index + 1);
+                }
+            });
+            calculationSetCounter = sets.length + 1;
+        }
+        
+        function updateDebugInfo() {
+            const sets = document.querySelectorAll('.calculation-input-set');
+            const debugInfo = document.getElementById('debugInfo');
+            debugInfo.innerHTML = `
+                <p><strong>Total sets:</strong> ${sets.length}</p>
+                <p><strong>Counter:</strong> ${calculationSetCounter}</p>
+                <p><strong>Sets:</strong></p>
+                <ul>
+                    ${Array.from(sets).map((set, index) => {
+                        const removeBtn = set.querySelector('.remove-calculation');
+                        const isVisible = removeBtn ? removeBtn.style.display !== 'none' : false;
+                        return `<li>Set ${index + 1}: ID=${set.getAttribute('data-set-id')}, Remove visible=${isVisible}</li>`;
+                    }).join('')}
+                </ul>
+            `;
+        }
+        
+        function getAllCalculationInputs() {
+            const sets = document.querySelectorAll('.calculation-input-set');
+            const inputs = [];
+            
+            sets.forEach((set, index) => {
+                const widthInput = set.querySelector('.width-input');
+                const heightInput = set.querySelector('.height-input');
+                const quantityInput = set.querySelector('.quantity-input');
+                const widthUnit = set.querySelector('.width-unit');
+                const heightUnit = set.querySelector('.height-unit');
+                
+                if (widthInput && heightInput && quantityInput && 
+                    widthInput.value && heightInput.value && quantityInput.value) {
+                    inputs.push({
+                        setId: index + 1,
+                        width: parseFloat(widthInput.value),
+                        height: parseFloat(heightInput.value),
+                        quantity: parseInt(quantityInput.value),
+                        widthUnit: widthUnit.value,
+                        heightUnit: heightUnit.value
+                    });
+                }
+            });
+            
+            return inputs;
+        }
+        
+        function calculate() {
+            const inputs = getAllCalculationInputs();
+            const output = document.getElementById('output');
+            
+            if (inputs.length === 0) {
+                output.innerHTML = '<div class="alert alert-warning">Please enter at least one set of dimensions</div>';
+                return;
+            }
+            
+            let result = '<div class="alert alert-success"><h5>Calculation Results:</h5><ul>';
+            inputs.forEach((input, index) => {
+                result += `<li>Set ${index + 1}: ${input.width}${input.widthUnit} × ${input.height}${input.heightUnit} × ${input.quantity} pcs</li>`;
+            });
+            result += '</ul></div>';
+            
+            output.innerHTML = result;
+        }
+        
+        // Event delegation for add/remove buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.add-calculation')) {
+                console.log('Add calculation button clicked via delegation');
+                e.preventDefault();
+                e.stopPropagation();
+                addCalculationSet();
+            }
+            
+            if (e.target.closest('.remove-calculation')) {
+                console.log('Remove calculation button clicked via delegation');
+                e.preventDefault();
+                e.stopPropagation();
+                const setElement = e.target.closest('.calculation-input-set');
+                if (setElement) {
+                    removeCalculationSet(setElement);
+                }
+            }
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing...');
+            
+            const calculateBtn = document.getElementById('calculateBtn');
+            if (calculateBtn) {
+                calculateBtn.addEventListener('click', calculate);
+            }
+            
+            updateRemoveButtons();
+            updateDebugInfo();
+            
+            console.log('Test page initialized successfully');
+        });
+    </script>
+</body>
+</html>
